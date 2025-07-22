@@ -3,9 +3,15 @@ Place these in a Folder, any name don't care...
 
 Google Chrome:
 
-then go to chrome://extensions/ and select load unpacked (Must be in Developer Mode) and click on the folder that you have.
+go to chrome://extensions/ 
 
-This is open source I do not take responsibility if someone re-uploads and does some stupid crazy stuff to it.
+enable developer mode
+
+select load unpacked 
+
+click on your file with the two codes in them
+
+boom go to roblox
 
 
 Microsoft Edge: 
@@ -19,3 +25,8 @@ load unpacked
 click on your file with the two codes in them
 
 boom go to roblox
+
+
+This is open source, im not resposible if someone re-uploads it and does stupid stuff to it.
+
+no we do not collect data as this is an extention that changes a few words on the website.
