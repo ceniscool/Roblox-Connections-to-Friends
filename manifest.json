@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.roblox.com/*"],
-      "js": ["replace.js"],
+      "js": ["replace.js", "version-checker.js"],
       "run_at": "document_idle"
     }
   ]
