@@ -2,7 +2,9 @@ function replaceText(node) {
   if (node.nodeType === Node.TEXT_NODE) {
     node.textContent = node.textContent
       .replace(/\bConnections\b/g, 'Friends')
-      .replace(/\bConnect\b/g, 'Friends');
+      .replace(/\bConnect\b/g, 'Friends')
+      .replace(/\bAdd Connection\b/g, 'Add Friend')
+      .replace(/\bRemove Connection\b/g, 'Unfriend');
   } else {
     for (let child of node.childNodes) {
       replaceText(child);
