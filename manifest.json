@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Roblox Friends Renamer",
-  "version": "1.0",
+  "name": "Roblox: Revert Connections To Friends",
+  "version": "1.0.3",
   "description": "Replaces 'Connections' with 'Friends' on Roblox.",
   "permissions": ["notifications"],
   "background": {
