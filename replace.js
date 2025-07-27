@@ -3,8 +3,8 @@ function replaceText(node) {
     node.textContent = node.textContent
       .replace(/\bConnections\b/g, 'Friends')
       .replace(/\bConnect\b/g, 'Friends')
-      .replace(/\bAdd Connections\b/g, 'Add Friend')
-      .replace(/\bRemove Connections\b/g, 'Unfriend');
+      .replace(/\bAdd Connection\b/g, 'Add Friend')
+      .replace(/\bRemove Connection\b/g, 'Unfriend');
   } else {
     for (let child of node.childNodes) {
       replaceText(child);
