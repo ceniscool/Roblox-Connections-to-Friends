@@ -6,7 +6,7 @@
   "permissions": ["notifications"],
     "action": {
     "default_icon": {
-      "48": "icon.png"
+      "48": "rsz_maxresdefault.png"
     },
   "background": {
     "service_worker": "background.js"
