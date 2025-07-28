@@ -6,53 +6,38 @@ function replaceText(node) {
     return;
   }
 
-  try {
-    if (node.nodeType === Node.TEXT_NODE) {
-      node.textContent = node.textContent
-        .replace(/\bConnections\b/g, 'Friends')
-        .replace(/\bConnect\b/g, 'Friends')
-        .replace(/\bAdd Connection\b/g, 'Add Friend')
-        .replace(/\bRemove Connection\b/g, 'Unfriend')
-        .replace(/\bSearch for Connections\b/g, 'Search for Friends')
-        .replace(/\bSearch Connections\b/g, 'Search Friends');
-    } else {
-      for (let child of node.childNodes) {
-        replaceText(child);
-      }
+  if (node.nodeType === Node.TEXT_NODE) {
+    node.textContent = node.textContent
+      .replace(/\bConnections\b/g, 'Friends')
+      .replace(/\bConnect\b/g, 'Friends')
+      .replace(/\bAdd Connection\b/g, 'Add Friend')
+      .replace(/\bRemove Connection\b/g, 'Unfriend')
+      .replace(/\bSearch for Connections\b/g, 'Search for Friends')
+      .replace(/\bSearch Connections\b/g, 'Search Friends');
+  } else {
+    for (let child of node.childNodes) {
+      replaceText(child);
     }
-  } catch (e) {
-    console.error('replaceText error:', e);
   }
 }
 
 // Run immediately
 replaceText(document.body);
 
-// Change the tab title if it contains 'Connections'
-if (document.title.includes('Connections')) {
-  document.title = document.title.replace(/Connections/g, 'Friends');
-}
-
-// Watch for future changes
-let isProcessing = false;
+// Watch for body changes (dynamic content)
 const observer = new MutationObserver((mutations) => {
-  if (isProcessing) return;
-  isProcessing = true;
-
-  requestAnimationFrame(() => {
-    for (const mutation of mutations) {
-      for (const node of mutation.addedNodes) {
-        replaceText(node);
-      }
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      replaceText(node);
     }
-
-    // Re-check the tab title in case it changed dynamically
-    if (document.title.includes('Connections')) {
-      document.title = document.title.replace(/Connections/g, 'Friends');
-    }
-
-    isProcessing = false;
-  });
+  }
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
+
+// Continuously update title every 500ms
+setInterval(() => {
+  if (document.title.includes('Connections')) {
+    document.title = document.title.replace(/Connections/g, 'Friends');
+  }
+}, 500);
