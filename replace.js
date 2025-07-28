@@ -1,4 +1,15 @@
-function replaceText(node) {
+function applyReplacements(text) {
+  if (!text) return text;
+  return text
+    .replace(/\bConnections\b/g, 'Friends')
+    .replace(/\bConnect\b/g, 'Friends')
+    .replace(/\bAdd Connection\b/g, 'Add Friend')
+    .replace(/\bRemove Connection\b/g, 'Unfriend')
+    .replace(/\bSearch for Connections\b/g, 'Search for Friends')
+    .replace(/\bSearch Connections\b/g, 'Search Friends');
+}
+
+function replaceTextContent(node) {
   if (
     node.nodeType === Node.ELEMENT_NODE &&
     ['SCRIPT', 'STYLE', 'IFRAME'].includes(node.tagName)
@@ -7,37 +18,59 @@ function replaceText(node) {
   }
 
   if (node.nodeType === Node.TEXT_NODE) {
-    node.textContent = node.textContent
-      .replace(/\bConnections\b/g, 'Friends')
-      .replace(/\bConnect\b/g, 'Friends')
-      .replace(/\bAdd Connection\b/g, 'Add Friend')
-      .replace(/\bRemove Connection\b/g, 'Unfriend')
-      .replace(/\bSearch for Connections\b/g, 'Search for Friends')
-      .replace(/\bSearch Connections\b/g, 'Search Friends');
-  } else {
+    node.textContent = applyReplacements(node.textContent);
+  } else if (node.nodeType === Node.ELEMENT_NODE) {
+    // Replace value of inputs and textareas
+    if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
+      node.value = applyReplacements(node.value);
+
+      // Also replace placeholder attribute
+      const placeholder = node.getAttribute('placeholder');
+      if (placeholder) {
+        const newPlaceholder = applyReplacements(placeholder);
+        if (newPlaceholder !== placeholder) {
+          node.setAttribute('placeholder', newPlaceholder);
+        }
+      }
+    }
+
+    // Recursively process child nodes
     for (let child of node.childNodes) {
-      replaceText(child);
+      replaceTextContent(child);
     }
   }
 }
 
-// Run immediately
-replaceText(document.body);
+// Initial run
+replaceTextContent(document.body);
 
-// Watch for body changes (dynamic content)
+// MutationObserver to handle dynamic content
 const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
-      replaceText(node);
+      replaceTextContent(node);
     }
   }
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Continuously update title every 500ms
+// Continuously replace document title
 setInterval(() => {
-  if (document.title.includes('Connections')) {
-    document.title = document.title.replace(/Connections/g, 'Friends');
-  }
+  document.title = applyReplacements(document.title);
 }, 500);
+
+// Periodically update input values and placeholders (in case React updates them)
+setInterval(() => {
+  document.querySelectorAll('input, textarea').forEach((el) => {
+    el.value = applyReplacements(el.value);
+
+    const placeholder = el.getAttribute('placeholder');
+    if (placeholder) {
+      const newPlaceholder = applyReplacements(placeholder);
+      if (newPlaceholder !== placeholder) {
+        el.setAttribute('placeholder', newPlaceholder);
+      }
+    }
+  });
+}, 1000);
