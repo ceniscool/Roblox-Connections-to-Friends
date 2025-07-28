@@ -1,6 +1,20 @@
 Place these in a Folder, any name don't care...
 
 
+
+To disable notifications please go to the extension
+
+right click on it
+
+View web perms
+
+Notifications -> Blocked
+
+
+**There will be a future update that gives the extension a interface so that people can disable and enable certain settings**
+**All other things are enabled by default and were not approved by me but I would not make a code that takes everything.**
+
+
 Google Chrome:
 
 go to chrome://extensions/ 
