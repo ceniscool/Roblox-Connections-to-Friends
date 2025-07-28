@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Roblox: Revert Connections To Friends",
-  "version": "1.0.4.4",
+  "version": "1.0.4.5",
   "description": "Replaces 'Connections' with 'Friends' on Roblox.",
   "permissions": ["notifications"],
-    "action": {
+  "action": {
     "default_icon": {
       "48": "rsz_maxresdefault.png"
     },
+    "default_title": "Roblox Friends Extension"
+  },
   "background": {
     "service_worker": "background.js"
   },
@@ -19,5 +21,3 @@
     }
   ]
 }
-
-
