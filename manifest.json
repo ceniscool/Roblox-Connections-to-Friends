@@ -4,6 +4,10 @@
   "version": "1.0.4.2",
   "description": "Replaces 'Connections' with 'Friends' on Roblox.",
   "permissions": ["notifications"],
+    "action": {
+    "default_icon": {
+      "48": "icon.png"
+    },
   "background": {
     "service_worker": "background.js"
   },
@@ -15,3 +19,5 @@
     }
   ]
 }
+
+
