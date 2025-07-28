@@ -4,7 +4,9 @@ function replaceText(node) {
       .replace(/\bConnections\b/g, 'Friends')
       .replace(/\bConnect\b/g, 'Friends')
       .replace(/\bAdd Connection\b/g, 'Add Friend')
-      .replace(/\bRemove Connection\b/g, 'Unfriend');
+      .replace(/\bRemove Connection\b/g, 'Unfriend')
+      .replace(/\bSearch for Connections\b/g, 'Search for Friends')
+      .replace(/\bSearch Connections\b/g, 'Search Friends'),
   } else {
     for (let child of node.childNodes) {
       replaceText(child);
